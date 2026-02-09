@@ -5,15 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loans Page</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        .logo-container a {
+            display: inline-block;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-container a:hover {
+            opacity: 0.8;
+        }
+
+        .logo {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .iframe-container {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        iframe {
+            width: 100%;
+            height: 900px;
+            border: none;
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .logo {
+                max-width: 200px;
+            }
+
+            .logo-container {
+                padding: 15px;
+            }
+
+            iframe {
+                height: calc(100vh - 80px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                max-width: 150px;
+            }
+
+            .logo-container {
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <iframe src="https://cvtpm.com/iframe/v2.7/?cid2=1425" sandbox="allow-scripts allow-top-navigation allow-same-origin allow-popups" width="100%" height="900px" style="border: none;"></iframe>
+    <div class="container">
+        <div class="logo-container">
+            <a href="https://www.dailydebtsolution.com/" target="_blank" rel="noopener noreferrer">
+                <img src="daily-debt-logo-cropped-300x93.png" alt="Daily Debt Logo" class="logo">
+            </a>
+        </div>
+        <div class="iframe-container">
+            <iframe src="https://cvtpm.com/iframe/v2.7/?cid2=1425" sandbox="allow-scripts allow-top-navigation allow-same-origin allow-popups"></iframe>
+        </div>
+    </div>
 </body>
 </html>
 
