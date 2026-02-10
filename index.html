@@ -50,9 +50,9 @@
         .hero-section {
             background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
             padding: 60px 20px 0 20px;
-            min-height: 600px;
+            /* min-height: 850px; */
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .hero-container {
@@ -63,7 +63,7 @@
             gap: 60px;
             align-items: flex-start;
             height: 100%;
-            min-height: 600px;
+            /* min-height: 850px; */
         }
 
         .hero-content {
@@ -74,7 +74,7 @@
         }
 
         .hero-content h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 20px;
             color: #2d2d2d;
@@ -88,9 +88,9 @@
         }
 
         .hero-content p {
-            font-size: 1.15rem;
+            font-size: 1.5rem;
             color: #4b5563;
-            margin-bottom: 40px;
+            margin-bottom: 10px;
             line-height: 1.65;
             max-width: 500px;
         }
@@ -98,11 +98,12 @@
         .hero-image-wrapper {
             position: absolute;
             bottom: 0;
+            top: 180px;
             left: 0;
             right: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-end;
+            /* align-items: flex-end; */
             margin: 0;
             padding: 0;
             line-height: 0;
@@ -111,7 +112,7 @@
         .hero-image {
             width: 100%;
             height: auto;
-            max-width: 750px;
+            max-width: 900px;
             display: block;
             margin: 0;
             padding: 0;
@@ -231,8 +232,9 @@
 
         /* How it Works Section */
         .how-it-works {
-            padding: 80px 20px;
+            padding: 10px 20px;
             background: white;
+            margin-bottom: 60px !important;
         }
 
         .how-it-works-container {
@@ -372,64 +374,149 @@
 
         /* Mobile Responsive */
         @media (max-width: 968px) {
+            .header {
+                padding: 15px 0;
+            }
+
+            .header-container {
+                padding: 0 15px;
+            }
+
             .hero-section {
-                padding: 40px 20px 0 20px;
-                min-height: auto;
+                padding: 40px 15px 0 15px;
             }
 
             .hero-container {
                 grid-template-columns: 1fr;
-                gap: 40px;
-                min-height: auto;
+                gap: 30px;
             }
 
             .hero-content {
                 position: relative;
-                min-height: 500px;
+                min-height: auto;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+                margin-bottom: 15px;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+                max-width: 100%;
             }
 
             .hero-image-wrapper {
-                position: absolute;
-                bottom: 0;
+                position: relative;
+                top: auto;
+                bottom: auto;
+                margin-top: 20px;
+                margin-bottom: 0;
             }
 
             .hero-image {
-                max-width: 480px;
+                max-width: 100%;
+                width: 100%;
             }
 
-            .credit-section {
-                padding: 40px 20px 0 20px;
+            .form-card {
+                padding: 15px;
             }
 
-            .credit-container {
-                grid-template-columns: 1fr;
-                gap: 40px;
+            .form-card iframe {
+                height: 600px;
             }
 
-            .credit-content {
-                padding-bottom: 40px;
-            }
-
-            .credit-image-wrapper {
-                margin-top: -100px;
-            }
-
-            .credit-image {
-                max-width: 550px;
+            .how-it-works {
+                padding: 60px 15px;
             }
 
             .steps-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 50px;
+                margin-top: 50px;
             }
 
             .steps-grid::before {
                 display: none;
             }
 
-            .hero-content h1,
+            .step-icon-wrapper {
+                width: 150px;
+                height: 150px;
+            }
+
+            .step-icon-number {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .step-item h3 {
+                font-size: 1.1rem;
+            }
+
+            .credit-section {
+                padding: 50px 15px 0 15px;
+            }
+
+            .credit-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 40px 15px 0 15px;
+            }
+
+            .credit-content {
+                padding-bottom: 30px;
+                text-align: center;
+            }
+
             .credit-content h2 {
                 font-size: 2rem;
+                margin-bottom: 20px;
+            }
+
+            .credit-content p {
+                font-size: 1.1rem;
+                max-width: 100%;
+            }
+
+            .credit-image-wrapper {
+                margin-top: -60px;
+            }
+
+            .credit-image {
+                max-width: 100%;
+            }
+
+            .footer {
+                padding: 30px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 12px 0;
+            }
+
+            .hero-section {
+                padding: 30px 12px 0 12px;
+            }
+
+            .hero-content h1 {
+                font-size: 1.75rem;
+                margin-bottom: 12px;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+
+            .hero-image-wrapper {
+                margin-top: 15px;
             }
 
             .form-card {
@@ -439,24 +526,57 @@
             .form-card iframe {
                 height: 550px;
             }
-        }
 
-        @media (max-width: 480px) {
-            .hero-content h1,
+            .how-it-works {
+                padding: 50px 12px;
+            }
+
+            .steps-grid {
+                gap: 40px;
+                margin-top: 40px;
+            }
+
+            .step-icon-wrapper {
+                width: 120px;
+                height: 120px;
+            }
+
+            .step-icon-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .step-item h3 {
+                font-size: 1rem;
+            }
+
+            .credit-section {
+                padding: 40px 12px 0 12px;
+            }
+
+            .credit-container {
+                padding: 30px 12px 0 12px;
+            }
+
             .credit-content h2 {
-                font-size: 1.5rem;
+                font-size: 1.75rem;
+            }
+
+            .credit-content p {
+                font-size: 1rem;
+            }
+
+            .credit-image-wrapper {
+                margin-top: -40px;
             }
 
             .logo {
                 height: 30px;
             }
 
-            .form-card {
-                padding: 10px;
-            }
-
-            .form-card iframe {
-                height: 500px;
+            .footer {
+                padding: 25px 12px;
             }
         }
     </style>
