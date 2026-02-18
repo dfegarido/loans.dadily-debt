@@ -127,32 +127,29 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             overflow: hidden;
             height: fit-content;
-            max-height: 550px;
             margin-bottom: 15px;
             display: flex;
             flex-direction: column;
         }
 
-        .form-card iframe {
-            display: block;
+        /* Iframe wrapper — clips extra space at the bottom */
+        .form-iframe-wrapper {
+            position: relative;
             width: 100%;
-            height: 550px;
-            border: none;
-            border-radius: 12px;
             overflow: hidden;
-         
+            border-radius: 12px;
+            /* Adjust this height to control where scroll stops */
+            height: 560px;
         }
 
-        .form-card > *,
-        .form-card form,
-        .form-card #jsForm,
-        .form-card [id*="form"],
-        .form-card [class*="form"] {
+        .form-iframe-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-radius: 12px;
-            max-height: 520px;
-            overflow-y: auto;
-            overflow-x: hidden;
+            /* Taller than wrapper so content fits, wrapper clips the bottom */
+            height: 700px;
+            border: none;
         }
 
         .form-steps {
@@ -440,8 +437,12 @@
                 padding: 15px;
             }
 
-            .form-card iframe {
-                height: 600px;
+            .form-iframe-wrapper {
+                height: 560px;
+            }
+
+            .form-iframe-wrapper iframe {
+                height: 700px;
             }
 
             .how-it-works {
@@ -538,8 +539,12 @@
                 padding: 12px;
             }
 
-            .form-card iframe {
-                height: 550px;
+            .form-iframe-wrapper {
+                height: 560px;
+            }
+
+            .form-iframe-wrapper iframe {
+                height: 700px;
             }
 
             .how-it-works {
@@ -618,8 +623,12 @@
                 overflow: hidden;
             }
 
-            .form-card iframe {
-                height: 500px;
+            .form-iframe-wrapper {
+                height: 540px;
+            }
+
+            .form-iframe-wrapper iframe {
+                height: 680px;
                 width: 100%;
                 transform: scale(0.95);
                 transform-origin: top center;
@@ -678,8 +687,12 @@
                 max-width: 100%;
             }
 
-            .form-card iframe {
-                height: 550px;
+            .form-iframe-wrapper {
+                height: 560px;
+            }
+
+            .form-iframe-wrapper iframe {
+                height: 700px;
                 width: 100%;
             }
         }
@@ -763,6 +776,61 @@
         </a>
     </footer>
 
+    <script>
+        // The form loads inside a cross-origin iframe (cvtpm.com).
+        // We cannot access its internal DOM. The fix is to wrap the iframe
+        // in a clipping container and set its height to stop at "Advertiser Disclosure".
+
+        function wrapFormIframe() {
+            const formCard = document.querySelector('.form-card');
+            if (!formCard) return;
+
+            // Find the iframe injected by the form script
+            const iframe = formCard.querySelector('iframe');
+            if (!iframe) return;
+
+            // Avoid double-wrapping
+            if (iframe.parentElement.classList.contains('form-iframe-wrapper')) return;
+
+            // Create the clipping wrapper
+            const wrapper = document.createElement('div');
+            wrapper.className = 'form-iframe-wrapper';
+
+            // Insert wrapper before iframe, then move iframe inside
+            iframe.parentNode.insertBefore(wrapper, iframe);
+            wrapper.appendChild(iframe);
+
+            // Remove any inline height/styles set by the form script
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.width = '100%';
+            iframe.style.height = '600px';
+            iframe.style.border = 'none';
+        }
+
+        // Watch for the iframe being dynamically added by the form script
+        const observer = new MutationObserver(function(mutations) {
+            for (let mutation of mutations) {
+                for (let node of mutation.addedNodes) {
+                    if (node.tagName === 'IFRAME' || 
+                        (node.querySelector && node.querySelector('iframe'))) {
+                        wrapFormIframe();
+                        return;
+                    }
+                }
+            }
+        });
+
+        const formCard = document.querySelector('.form-card');
+        if (formCard) {
+            observer.observe(formCard, { childList: true, subtree: true });
+        }
+
+        // Also try on load in case iframe is already present
+        document.addEventListener('DOMContentLoaded', wrapFormIframe);
+        window.addEventListener('load', wrapFormIframe);
+    </script>
  
 </body>   
 </html>
